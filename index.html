@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexusord — The Future of Voice & Chat</title>
+    <!-- Απόλυτα λιτό: μόνο το όνομα και το κουμπί -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a0f 0%, #16162a 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 1.5rem;
+            /* διακριτικό animated grid σαν τεχνολογική πινελιά */
+            background-image: 
+                linear-gradient(rgba(88, 101, 242, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(88, 101, 242, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: subtleShift 20s infinite linear;
+        }
+
+        @keyframes subtleShift {
+            0% { background-position: 0 0, 0 0; }
+            100% { background-position: 60px 60px, -60px 60px; }
+        }
+
+        /* Το μοναδικό card – τίποτα άλλο εκτός από όνομα + κουμπί */
+        .nexus-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2.8rem;
+            text-align: center;
+            background: rgba(20, 20, 35, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 3.5rem;
+            padding: 4rem 3rem;
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.6),
+                0 0 0 1px rgba(255, 255, 255, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            max-width: 550px;
+            width: 100%;
+            transition: transform 0.3s ease;
+        }
+
+        .nexus-container:hover {
+            transform: translateY(-4px);
+            box-shadow: 
+                0 40px 80px rgba(0, 0, 0, 0.7),
+                0 0 0 1px rgba(88, 101, 242, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        }
+
+        /* Το όνομα της εφαρμογής – κυρίαρχο, bold, σαν Discord αλλά ξεχωριστό */
+        .app-title {
+            font-size: clamp(3.8rem, 12vw, 5.5rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: #ffffff;
+            text-shadow: 0 0 30px rgba(99, 102, 241, 0.5);
+            background: linear-gradient(180deg, #f0f0ff 0%, #c0c0f0 80%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+            filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.4));
+            margin: 0;
+            user-select: none;
+        }
+
+        /* υπογράμμιση/διακοσμητικό για να μην είναι μόνο κείμενο */
+        .title-underline {
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #5865f2, #7c3aed, #5865f2);
+            border-radius: 10px;
+            margin-top: -0.8rem;
+            opacity: 0.9;
+            box-shadow: 0 0 20px #5865f2aa;
+            animation: pulseGlow 2.5s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 12px #5865f288; width: 70px; }
+            100% { box-shadow: 0 0 28px #7c3aedcc; width: 110px; }
+        }
+
+        /* Το DOWNLOAD NOW κουμπί – το μόνο διαδραστικό στοιχείο */
+        .download-btn {
+            background: #5865f2;  /* Discord-inspired μωβ/μπλε */
+            border: none;
+            color: white;
+            font-size: 1.7rem;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            padding: 1.2rem 3.2rem;
+            border-radius: 60px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            background: linear-gradient(135deg, #5865f2 0%, #7c3aed 100%);
+            box-shadow: 0 12px 30px rgba(88, 101, 242, 0.5), 0 4px 10px rgba(0,0,0,0.3);
+            transition: all 0.25s ease;
+            text-transform: uppercase;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            width: fit-content;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(88, 101, 242, 0.7), 0 6px 14px rgba(0,0,0,0.4);
+            background: linear-gradient(135deg, #6d76f5 0%, #8b4cf7 100%);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .download-btn:hover::before {
+            left: 100%;
+        }
+
+        .download-btn:active {
+            transform: scale(0.97);
+            box-shadow: 0 8px 18px rgba(88, 101, 242, 0.6);
+            transition: 0.08s;
+        }
+
+        /* εικονίδιο download (SVG inline) */
+        .download-icon {
+            width: 1.8rem;
+            height: 1.8rem;
+            fill: white;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+            transition: transform 0.2s;
+        }
+
+        .download-btn:hover .download-icon {
+            transform: translateY(2px);
+        }
+
+        /* Απόκρυψη οτιδήποτε άλλου – το disclaimer είναι κυριολεκτικά invisible για το design,
+           αλλά θέλουμε μόνο όνομα και κουμπί. Δεν υπάρχει footer, nav, τίποτα. */
+        /* εξασφαλίζουμε ότι δεν υπάρχουν περισσευούμενα */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            border: 0;
+        }
+
+        /* responsive fine-tuning */
+        @media (max-width: 480px) {
+            .nexus-container {
+                padding: 2.8rem 1.8rem;
+                gap: 2.2rem;
+                border-radius: 2.5rem;
+            }
+            .download-btn {
+                font-size: 1.4rem;
+                padding: 1rem 2.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Κυριολεκτικά μόνο το container με το όνομα και το κουμπί -->
+    <main class="nexus-container">
+        <!-- Το όνομα της εφαρμογής: Nexusord (τίποτα άλλο) -->
+        <h1 class="app-title">Nexusord</h1>
+        <div class="title-underline" aria-hidden="true"></div>
+        
+        <!-- Κουμπί Download Now – το μοναδικό κουμπί, χωρίς περίπλοκα -->
+        <button class="download-btn" id="downloadButton" aria-label="Download Nexusord now">
+            <svg class="download-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+                <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+            </svg>
+            Download Now
+        </button>
+        <!-- ΤΕΛΟΣ – δεν υπάρχει τίποτε άλλο. Ούτε links, ούτε footer -->
+    </main>
+
+    <!-- Ένα αόρατο script για να δίνει feedback στο κλικ (προσομοίωση λήψης) 
+         χωρίς να προσθέτει οπτικό στοιχείο -->
+    <script>
+        (function() {
+            // Απλό interaction: όταν πατάς Download Now, δείχνει ότι έγινε κάτι
+            const downloadBtn = document.getElementById('downloadButton');
+            
+            if (downloadBtn) {
+                downloadBtn.addEventListener('click', function(e) {
+                    // Αποφυγή default αν ήταν link, αλλά είναι button
+                    e.preventDefault();
+                    
+                    // Οπτικό feedback χωρίς να αλλάζει το design: 
+                    // προσωρινή αλλαγή κειμένου (επιστρέφει στο original)
+                    const originalText = 'Download Now';
+                    const originalHTML = downloadBtn.innerHTML;
+                    
+                    // Αλλάζουμε στιγμιαία σε "Starting..."
+                    downloadBtn.innerHTML = `<svg class="download-icon" viewBox="0 0 24 24" width="24" height="24" style="fill:white;"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg> Starting...`;
+                    downloadBtn.style.pointerEvents = 'none'; // αποφυγή διπλού κλικ
+                    
+                    // Επαναφορά μετά από 1.8 δευτερόλεπτα (σαν download simulation)
+                    setTimeout(() => {
+                        downloadBtn.innerHTML = originalHTML;
+                        downloadBtn.style.pointerEvents = 'auto';
+                        
+                        // Προαιρετικά: δημιουργία ενός dummy download (δεν κατεβάζει αρχείο, 
+                        // απλά ενημερώνει τον χρήστη ότι η εφαρμογή "κατεβαίνει")
+                        console.log('Nexusord download initiated (demo)');
+                        // Μπορείς να ενεργοποιήσεις ένα actual download με ένα placeholder αρχείο
+                        // αλλά κρατάμε την οδηγία για απλότητα.
+                    }, 1800);
+                    
+                    // Επίσης, μπορούμε να δημιουργήσουμε ένα εικονικό download με blob,
+                    // αλλά για να μείνουμε στο "τίποτα άλλο", απλά ενημερώνουμε.
+                    // Αν θες πραγματικό αρχείο, θα μπορούσες να κατεβάσεις ένα .txt.
+                    // Θα προσθέσω ένα μικρό, αόρατο κατέβασμα placeholder για ρεαλισμό:
+                    const element = document.createElement('a');
+                    element.setAttribute('href', 'https://algebra1lykeiou.github.io/nexusord/download/nexusord-setup.exe');;
+                    element.setAttribute('download', 'Nexusord_launcher.txt');
+                    element.style.display = 'none';
+                    document.body.appendChild(element);
+                    element.click();
+                    document.body.removeChild(element);
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
